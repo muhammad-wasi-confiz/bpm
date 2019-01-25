@@ -32,6 +32,22 @@ public final class DefaultFormFields {
         public static final String TYPE = "boolean";
     }
 
+    public static final class DateField {
+
+        public static final String TYPE = "date";
+
+        private DateField() {
+        }
+    }
+
+    public static final class DateTimeField {
+
+        public static final String TYPE = "dateTime";
+
+        private DateTimeField() {
+        }
+    }
+
     private DefaultFormFields() {
     }
 }

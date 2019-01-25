@@ -6,6 +6,8 @@ import io.takari.bpm.model.form.DefaultFormFields.BooleanField;
 import io.takari.bpm.model.form.DefaultFormFields.DecimalField;
 import io.takari.bpm.model.form.DefaultFormFields.IntegerField;
 import io.takari.bpm.model.form.DefaultFormFields.StringField;
+import io.takari.bpm.model.form.DefaultFormFields.DateField;
+import io.takari.bpm.model.form.DefaultFormFields.DateTimeField;
 import io.takari.bpm.model.form.FormDefinition;
 import io.takari.bpm.model.form.FormField;
 import io.takari.bpm.model.form.FormField.Cardinality;
@@ -32,6 +34,7 @@ public class DefaultFormValidator implements FormValidator {
         vs.add(new IntegerFieldValidator(locale));
         vs.add(new DecimalFieldValidator(locale));
         vs.add(new BooleanFieldValidator(locale));
+        vs.add(new DateFieldValidator(locale));
 
         this.validators = vs;
     }
@@ -521,6 +524,33 @@ public class DefaultFormValidator implements FormValidator {
 
             if (!(v instanceof Boolean)) {
                 return new ValidationError(fieldName, locale.expectedBoolean(formId, f, idx, v));
+            }
+
+            return null;
+        }
+    }
+
+    public static final class DateFieldValidator implements FieldValidator {
+
+        private static final String[] TYPES = {DateField.TYPE, DateTimeField.TYPE};
+
+        private final FormValidatorLocale locale;
+
+        public DateFieldValidator(FormValidatorLocale locale) {
+            this.locale = locale;
+        }
+
+        @Override
+        public String[] allowedTypes() {
+            return TYPES;
+        }
+
+        @Override
+        public ValidationError validate(String formId, FormField f, Integer idx, Object v) {
+            String fieldName = f.getName();
+
+            if (!(v instanceof Date)) {
+                return new ValidationError(fieldName, locale.expectedDate(formId, f, idx, v));
             }
 
             return null;

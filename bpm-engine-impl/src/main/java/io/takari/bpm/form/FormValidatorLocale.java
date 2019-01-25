@@ -67,6 +67,17 @@ public interface FormValidatorLocale {
     String expectedBoolean(String formId, FormField field, Integer idx, Object value);
 
     /**
+     * Expected a date value.
+     *
+     * @param formId
+     * @param field
+     * @param idx
+     * @param value
+     * @return
+     */
+    String expectedDate(String formId, FormField field, Integer idx, Object value);
+
+    /**
      * A string value doesn't match the specified pattern.
      *
      * @param formId

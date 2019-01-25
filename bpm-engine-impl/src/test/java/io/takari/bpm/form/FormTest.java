@@ -5,6 +5,7 @@ import io.takari.bpm.api.ExecutionException;
 import io.takari.bpm.api.JavaDelegate;
 import io.takari.bpm.form.FormSubmitResult.ValidationError;
 import io.takari.bpm.model.*;
+import io.takari.bpm.model.form.DefaultFormFields;
 import io.takari.bpm.model.form.DefaultFormFields.BooleanField;
 import io.takari.bpm.model.form.DefaultFormFields.DecimalField;
 import io.takari.bpm.model.form.DefaultFormFields.IntegerField;
@@ -208,10 +209,12 @@ public class FormTest extends AbstractFormTest {
                 new FormField.Builder("aDecimal", DecimalField.TYPE)
                         .build(),
                 new FormField.Builder("aBoolean", BooleanField.TYPE)
+                        .build(),
+                new FormField.Builder("aDate", DefaultFormFields.DateField.TYPE)
                         .build()));
 
         // ---
-
+        Date date = new Date();
         JavaDelegate t2 = spy(new JavaDelegate() {
 
             @Override
@@ -220,6 +223,7 @@ public class FormTest extends AbstractFormTest {
                 assertEquals(12345, get(ctx, "anInteger"));
                 assertEquals(54.321, get(ctx, "aDecimal"));
                 assertEquals(true, get(ctx, "aBoolean"));
+                assertEquals(date, get(ctx, "aDate"));
             }
 
             private Object get(ExecutionContext ctx, String fieldName) {
@@ -256,6 +260,7 @@ public class FormTest extends AbstractFormTest {
         data.put("anInteger", 12345);
         data.put("aDecimal", 54.321);
         data.put("aBoolean", true);
+        data.put("aDate", date);
 
         FormSubmitResult r = formService.submit(formInstanceId, data);
         assertTrue(r.isValid());
