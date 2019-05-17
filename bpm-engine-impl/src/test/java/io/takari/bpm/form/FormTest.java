@@ -55,7 +55,7 @@ public class FormTest extends AbstractFormTest {
         deploy(new ProcessDefinition(processId,
                 new StartEvent("start"),
                 new SequenceFlow("f1", "start", "t1"),
-                new UserTask("t1", new FormExtension(null, "${formNameVar}")),
+                new UserTask("t1", new FormExtension(formId)),
                 new SequenceFlow("f2", "t1", "t2"),
                 new ServiceTask("t2", ExpressionType.DELEGATE, "${t2}"),
                 new SequenceFlow("f3", "t2", "end"),
@@ -65,7 +65,7 @@ public class FormTest extends AbstractFormTest {
         // ---
 
         String key = UUID.randomUUID().toString();
-        getEngine().start(key, processId, Collections.singletonMap("formNameVar", "testForm"));
+        getEngine().start(key, processId, null);
 
         assertActivations(key, processId,
                 "start",
