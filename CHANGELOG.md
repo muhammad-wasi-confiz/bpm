@@ -1,5 +1,54 @@
 # Change Log
 
+## [0.58.1] - 2019-07-18
+
+### Changed
+
+- fixed the `ExecutionContext#CURRENT_FLOW_NAME_KEY` variable state
+when `copyAllCallActivityOutVariables` is enabled.
+
+
+
+## [0.58.0] - 2019-06-20
+
+### Added
+
+- boundary error events support for ScriptTasks.
+
+
+
+## [0.57.0] - 2019-06-09
+
+### Added
+
+- new variable `Execution#CURRENT_FLOW_NAME_KEY`: contains the name
+of the current flow.
+
+### Changed
+
+- detect cycles in arrays when interpolating values.
+
+
+
+## [0.56.1] - 2019-05-20
+
+### Changed
+
+- improved behavior of the `Interpolator` in case of circular
+references;
+- fixed `FormExtension` serialization issue - make it compatible with
+previously serialized versions.
+
+
+
+## [0.56.0] - 2019-05-17
+
+### Added
+
+- support for expressions in form names in `UserTask/FormExtension`.
+
+
+
 ## [0.55.0] - 2019-03-21
 
 ### Added
@@ -8,8 +57,9 @@
 
 ### Breaking
 
-- `ExecutionContext#suspend(String messageRef, Object payload)` replaced
-with `#suspend(String messageRef, Object payload, boolean resumeFromSameStep)`.
+- `ExecutionContext#suspend(String messageRef, Object payload)`
+replaced with
+`#suspend(String messageRef, Object payload, boolean resumeFromSameStep)`.
 
 
 
@@ -17,7 +67,8 @@ with `#suspend(String messageRef, Object payload, boolean resumeFromSameStep)`.
 
 ### Changed
 
-- refactor `Interpolator` to make it more useful outside of the tasks.
+- refactor `Interpolator` to make it more useful outside of the
+tasks.
 
 
 
@@ -25,8 +76,8 @@ with `#suspend(String messageRef, Object payload, boolean resumeFromSameStep)`.
 
 ### Changed
 
-- change the visibility the utility methods of `DefaultFormValidatorLocale` for easier
-subclassing.
+- change the visibility the utility methods of
+`DefaultFormValidatorLocale` for easier subclassing.
 
  
 
