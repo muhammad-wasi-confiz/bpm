@@ -221,6 +221,7 @@ public class FormField implements Serializable {
         public Builder(FormField prev) {
             this.name = prev.getName();
             this.type = prev.getType();
+            this.label = prev.getLabel();
             this.defaultValue = prev.getDefaultValue();
             this.allowedValue = prev.getAllowedValue();
             this.cardinality = prev.getCardinality();
